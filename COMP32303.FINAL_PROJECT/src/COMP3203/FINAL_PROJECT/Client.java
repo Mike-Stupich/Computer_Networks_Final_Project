@@ -1,22 +1,21 @@
 package COMP3203.FINAL_PROJECT;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JMenuBar;
-import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.Box;
 import javax.swing.JSlider;
+import javax.swing.UIManager;
 
 public class Client {
-
+	public static int DEFAULT_WIDTH = 400, DEFAULT_HEIGHT = 550;
+	public static int MAX_SENSORS = 100, MAX_RADIUS = 50, LINE_SCALE = 3;
+	public static int DATA_RANGE = 20;
 	public static Logger log = Logger.getLogger(Client.class.getName());
 	private JFrame frame;
 	private DataContainer data;
@@ -28,6 +27,7 @@ public class Client {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					Client window = new Client("COMP 3203 FINAL PROJECT");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -49,6 +49,7 @@ public class Client {
 	 */
 	private void initialize() {
 		data = new DataContainer();
+		
 		JSlider slider = new JSlider();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
@@ -69,6 +70,7 @@ public class Client {
 		JButton btnSimple = new JButton("Simple");
 		btnSimple.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				data.create("Simple", slider.getValue(), 1);
 				slider.getValue();
 				log.info(""+slider.getValue());
 			}

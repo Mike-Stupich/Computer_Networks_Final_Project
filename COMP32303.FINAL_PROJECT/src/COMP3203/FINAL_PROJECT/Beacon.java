@@ -15,7 +15,7 @@ public class Beacon {
 	protected Point p;
 	protected int r;
 	
-	public Beacon(int x, int r){
+	public Beacon(int x, int y, int r){
 		this.p = new Point(x, 100);
 		this.r = r;
 	}
