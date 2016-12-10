@@ -13,15 +13,16 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 public class DataContainer extends JPanel{
-	
-	
+	private static final long serialVersionUID = 1L;
 	protected ArrayList<Beacon> BeaconList;
 	protected int radius;
 	protected Random rand;
 	public final static int MAX_TRACE_LEN = 100 * Client.LINE_SCALE;
-	public final static int CENTER_Y = 135;
-	public static int WIDTH, HEIGHT;
+	public final static int CENTER_Y = 200;
+	public static int WIDTH;
 	public static int offsetX;
+	protected Algorithm algorithm;
+	
 	
 	public DataContainer(){
 		BeaconList = new ArrayList<Beacon>();
@@ -39,52 +40,59 @@ public class DataContainer extends JPanel{
 		super.paintComponent(beacon);
 		Graphics2D drawBeacon = (Graphics2D) beacon;
 		
-		drawL(drawBeacon, new Point((Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y), 
+		draw(drawBeacon, new Point((Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y), 
 			new Point(Client.DEFAULT_WIDTH - (Client.DEFAULT_WIDTH- MAX_TRACE_LEN)/2 ,CENTER_Y));
+			
+		Color c;
+		switch(Client.algChoice){
+		case "Simple":
+			c = new Color(255,0,0,100);
+			break;
+		case "Rigid":
+			c= new Color(0,255,0,100);
+			break;
+		case "CustomAlg":
+			c = new Color(0,0,255,100);
+			break;
+			default:
+				c = new Color(255,0,0,100);
+				break;
 		
+		}
 		for(Beacon b :BeaconList){
-			b.draw(drawBeacon);
+			b.draw(drawBeacon,c);
 		}
 	}
 	
-	public void drawL(Graphics2D beacon, Point...points){
+	public void draw(Graphics2D beacon, Point p1, Point p2){
 		beacon.setColor(new Color(230,230,230));
-		if( points.length %2 == 0){
-			for(int i =0; i < points.length; ++i){
-				beacon.drawLine(points[i].x, points[i].y, points[i+1].x, points[i+1].y);
-				++i;
-			}
-		}
+		beacon.drawLine(p1.x, p1.y, p2.x, p2.y);
 		repaint();
 	}
 	
-	public void run(){
+	public void start(String choice){
+		Client.log.info(choice);
+		algorithm =  new Algorithm(choice, BeaconList);
 		
 	}
 	
 	public void create(String choice, int numBeacons, int r){
-		WIDTH = getWidth();
-		HEIGHT = getHeight();
 		int pos=0;
-		if(choice.equals("Simple")){
-			radius = Client.LINE_SCALE * r;
-			offsetX = (Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2;
-			BeaconList.clear();
-			
-			for (int i=0; i < numBeacons; ++i){
-				pos = rand.nextInt(MAX_TRACE_LEN) + offsetX;
-				BeaconList.add(new Beacon(pos, CENTER_Y, radius));
-			}
+		radius = Client.LINE_SCALE * r;
+		offsetX = (Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2;
+		BeaconList.clear();
+		
+		for (int i=0; i < numBeacons; ++i){
+			pos = rand.nextInt(MAX_TRACE_LEN) + offsetX;
+			BeaconList.add(new Beacon(pos, CENTER_Y, radius));
 		}
-		else if (choice.equals("Rigid")){
-			
-		}
+		
 		repaint();
 	}
 	
 	
 	public void displayOnLine(List<Beacon> beaconList,int length, int offset){
-		//sortX(beaconList);
+		sortX(beaconList);
 		int edge = offset;
 		for(Beacon b: beaconList){
 			int gap =(b.getX() - b.getR()) - edge;
@@ -94,6 +102,7 @@ public class DataContainer extends JPanel{
 					b.setX(value);
 				}
 			}
+			edge = b.getX() + b.getR();
 		}
 	}
 	public void sortX(List<Beacon> beacons){

@@ -16,7 +16,7 @@ public class Beacon {
 	protected int r;
 	
 	public Beacon(int x, int y, int r){
-		this.p = new Point(x, 100);
+		this.p = new Point(x, y);
 		this.r = r;
 	}
 	
@@ -29,12 +29,13 @@ public class Beacon {
 		return "("+p.x+","+p.y+")";
 	}
 	
-	public void draw(Graphics2D circle){
+	public void draw(Graphics2D circle, Color color){
 		circle.setStroke(new BasicStroke());
 		circle.setColor(Color.red);
-		circle.drawLine(p.x-1, p.y, p.x+1, p.y); // sensor node cross-hair
-		circle.drawLine(p.x, p.y-1, p.x, p.y+1); // sensor node cross-hair
-		circle.setColor(new Color(50, 142, 253, 30));
+		circle.drawLine(p.x-1, p.y, p.x+1, p.y); 
+		circle.drawLine(p.x, p.y-1, p.x, p.y+1); 
+		//circle.setColor(new Color(255, 0, 0, 100));
+		circle.setColor(color);
 		circle.fillOval(p.x-r, p.y-r, 2*r, 2*r); // sensor range
 	}
 	
