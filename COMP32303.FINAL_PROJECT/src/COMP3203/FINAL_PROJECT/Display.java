@@ -26,12 +26,14 @@ public class Display extends JPanel{
 	protected JButton btnGraph;
 	protected JButton btnCustomAlg;
 	
+	protected Label header;
+	
 	
 	public final static int BEACON_MIN = 0;
 	public final static int BEACON_MAX = Client.MAX_BEACONS;
 	public final static int BEACON_INIT = 10;
 	
-	public final static int RADIUS_MIN = 1;
+	public final static int RADIUS_MIN = 0;
 	public final static int RADIUS_MAX = Client.MAX_RADIUS;
 	public final static int RADIUS_INIT = 5;
 	
@@ -49,6 +51,8 @@ public class Display extends JPanel{
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints();
 		setLayout(layout);
+
+		
 		beaconLabel = new Label("Beacons");
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -95,7 +99,7 @@ public class Display extends JPanel{
 		
 		radiusSlider = new JSlider(JSlider.HORIZONTAL, RADIUS_MIN, RADIUS_MAX, RADIUS_INIT);
 		radiusSlider.setMajorTickSpacing(10);
-		radiusSlider.setMinorTickSpacing(2);
+		radiusSlider.setMinorTickSpacing(1);
 		radiusSlider.setPaintTicks(true);
 		radiusSlider.setPaintLabels(true);
 		radiusSlider.setFocusable(false);
@@ -123,20 +127,6 @@ public class Display extends JPanel{
 		constraints.insets = new Insets(5, 10, 5, 10);
 		layout.setConstraints(btnCreate, constraints);
 		add(btnCreate);
-		
-		btnStart = new JButton("Start");
-		btnStart.setEnabled(false);
-		constraints.gridx = 1;
-		constraints.gridy = 4;
-		constraints.gridwidth = 1;
-		constraints.gridheight = 1;
-		constraints.weightx = 1;
-		constraints.weighty = 0;
-		constraints.anchor = GridBagConstraints.CENTER;
-		constraints.fill = GridBagConstraints.NONE;
-		constraints.insets = new Insets(5, 10, 5, 10);
-		layout.setConstraints(btnStart, constraints);
-		add(btnStart);
 		
 		btnSimple = new JButton("Simple");
 		constraints.gridx = 2;
@@ -189,6 +179,8 @@ public class Display extends JPanel{
 		constraints.insets = new Insets(5, 10, 5, 10);
 		layout.setConstraints(btnGraph, constraints);
 		add(btnGraph);
+		
+		
 	}
 	
 	protected void handleEvents(){
@@ -207,7 +199,9 @@ public class Display extends JPanel{
 		});
 	}
 	
+	
 	protected void update(){
+		
 		beaconLabel.setText("Beacons (n=" + beaconSlider.getValue() + "):");
 		CURRENT_RADIUS = radiusSlider.getValue();
 		CURRENT_BEACONS = beaconSlider.getValue();
@@ -220,7 +214,6 @@ public class Display extends JPanel{
 	public JSlider getBeaconSlider(){return beaconSlider;}
 	public JSlider getRadiusSlider(){return radiusSlider;}
 	public JButton getCreateButton(){return btnCreate;}
-	public JButton getStartButton(){return btnStart;}
 	public JButton getSimpleButton(){return btnSimple;}
 	public JButton getRigidButton(){return btnRigid;}
 	public JButton getCustomAlgButton(){return btnCustomAlg;}

@@ -12,7 +12,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
-public class DataContainer extends JPanel{
+public class DataComponent extends JPanel{
 	private static final long serialVersionUID = 1L;
 	protected ArrayList<Beacon> BeaconList;
 	protected int radius;
@@ -21,10 +21,10 @@ public class DataContainer extends JPanel{
 	public final static int CENTER_Y = 200;
 	public static int WIDTH;
 	public static int offsetX;
-	protected Algorithm algorithm;
+	public static Point lineStartPoint = new Point((Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y);
+	public static Point lineEndPoint = new Point(Client.DEFAULT_WIDTH - (Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y);
 	
-	
-	public DataContainer(){
+	public DataComponent(){
 		BeaconList = new ArrayList<Beacon>();
 		rand = new Random();
 		initLayout();
@@ -40,7 +40,7 @@ public class DataContainer extends JPanel{
 		super.paintComponent(beacon);
 		Graphics2D drawBeacon = (Graphics2D) beacon;
 		
-		draw(drawBeacon, new Point((Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y), 
+		drawLine(drawBeacon, new Point((Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y), 
 			new Point(Client.DEFAULT_WIDTH - (Client.DEFAULT_WIDTH- MAX_TRACE_LEN)/2 ,CENTER_Y));
 			
 		Color c;
@@ -64,17 +64,75 @@ public class DataContainer extends JPanel{
 		}
 	}
 	
-	public void draw(Graphics2D beacon, Point p1, Point p2){
+	public void drawLine(Graphics2D beacon, Point p1, Point p2){
 		beacon.setColor(new Color(230,230,230));
 		beacon.drawLine(p1.x, p1.y, p2.x, p2.y);
 		repaint();
 	}
 	
 	public void start(String choice){
-		Client.log.info(choice);
-		algorithm =  new Algorithm(choice, BeaconList);
-		
+		switch(choice){
+		case "Simple":
+			SimpleAlg(BeaconList);
+			break;
+			
+		case "Rigid":
+			RigidAlg(BeaconList);
+			break;
+			
+		case "CustomAlg":
+			CustomAlg(BeaconList);
+			break;
+		case "Graph":
+			break;
+		}
+
 	}
+	
+	protected void RigidAlg(List<Beacon> beacons){
+		sortX(beacons);
+		int lineStartx =(int) lineStartPoint.getX();
+		int lineEndx = (int) lineEndPoint.getX();
+		int coveredTo = lineStartx;
+		for(Beacon b : beacons){
+			if(coveredTo+ b.getR() >= lineEndx){	//All excess beacons are moved as right as possible (End of line)
+				b.setX(lineEndx);
+			}
+			else{
+				b.setX(coveredTo + b.getR());		//Sets the beacons to be evenly distributed along the line, covering exactly 2R each
+				coveredTo += 2* b.getR();
+			}
+		}
+	}
+	
+	protected void SimpleAlg(List<Beacon> beacons){
+		sortX(beacons);
+		int lineStartx =(int) lineStartPoint.getX();
+		int coveredTo = lineStartx;
+		int prevX=0;
+		for(Beacon b: beacons){
+			if(b.getX()- b.getR() > coveredTo){	//For first beacon
+				b.setX(coveredTo + b.getR());
+			}
+			else if(b.getX() - b.getR() > prevX +  b.getR()){
+				b.setX(prevX + 2*b.getR());
+			}
+			
+			prevX = b.getX();
+			coveredTo+=b.getX()+b.getR();
+		}
+	}
+	
+	
+
+	
+	protected void CustomAlg(List<Beacon> beacons){
+		for (int i = 0; i < beacons.size(); ++i){
+			beacons.get(i).setX(100);
+		}
+	}
+	
+	
 	
 	public void create(String choice, int numBeacons, int r){
 		int pos=0;
@@ -90,21 +148,6 @@ public class DataContainer extends JPanel{
 		repaint();
 	}
 	
-	
-	public void displayOnLine(List<Beacon> beaconList,int length, int offset){
-		sortX(beaconList);
-		int edge = offset;
-		for(Beacon b: beaconList){
-			int gap =(b.getX() - b.getR()) - edge;
-			if(gap > 0){
-				int value = b.getX() - gap;
-				if( value >= offset && value <=(offset+length)){
-					b.setX(value);
-				}
-			}
-			edge = b.getX() + b.getR();
-		}
-	}
 	public void sortX(List<Beacon> beacons){
 		Collections.sort(beacons, new Comparator<Beacon>(){
 			@Override

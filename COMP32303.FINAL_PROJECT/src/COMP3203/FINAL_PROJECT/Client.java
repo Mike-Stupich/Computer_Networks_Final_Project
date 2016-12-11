@@ -54,22 +54,16 @@ public class Client extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handleCreate();
-				view.getDisplay().btnStart.setEnabled(true);
+				setButtons(true);
 			}
 		});
-		
-		view.getDisplay().getStartButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				handleStart();
-				view.getDisplay().btnStart.setEnabled(false);
-			}
-		});
+
 		view.getDisplay().getSimpleButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				algChoice = "Simple";
 				handleStart();
+				setButtons(false);
 			}
 		});
 		
@@ -78,6 +72,7 @@ public class Client extends JFrame{
 			public void actionPerformed(ActionEvent event) {
 				algChoice = "Rigid";
 				handleStart();
+				setButtons(false);
 			}
 		});	
 		
@@ -86,6 +81,7 @@ public class Client extends JFrame{
 			public void actionPerformed(ActionEvent event) {
 				algChoice = "CustomAlg";
 				handleStart();
+				setButtons(false);
 			}
 		});
 		
@@ -95,6 +91,12 @@ public class Client extends JFrame{
 				handleGraph();
 			}
 		});
+	}
+	
+	protected void setButtons(boolean onOff){
+		view.getDisplay().getSimpleButton().setEnabled(onOff);
+		view.getDisplay().getRigidButton().setEnabled(onOff);
+		view.getDisplay().getCustomAlgButton().setEnabled(onOff);
 	}
 	
 	protected void handleStart() {

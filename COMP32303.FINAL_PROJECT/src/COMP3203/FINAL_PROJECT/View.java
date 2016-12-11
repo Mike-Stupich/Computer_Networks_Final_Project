@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 public class View extends JPanel{
 	private static final long serialVersionUID = 1L;
-	private DataContainer data;
+	private DataComponent data;
 	private Display display;
 	
 	public View(){
@@ -15,14 +15,10 @@ public class View extends JPanel{
 	
 	protected void initLayout(){
 		setLayout(new BorderLayout());
-		add(data = new DataContainer(), BorderLayout.CENTER);
+		add(data = new DataComponent(), BorderLayout.CENTER);
 		add(display = new Display(), BorderLayout.SOUTH);
 		
 	}
-	public DataContainer getData(){
-		return data;
-	}
-	public Display getDisplay(){
-		return display;
-	}
+	public DataComponent getData(){return data;}
+	public Display getDisplay(){return display;}
 }
