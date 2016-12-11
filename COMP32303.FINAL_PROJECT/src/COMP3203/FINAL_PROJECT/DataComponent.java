@@ -108,31 +108,39 @@ public class DataComponent extends JPanel{
 	protected void SimpleAlg(List<Beacon> beacons){
 		sortX(beacons);
 		int lineStartx =(int) lineStartPoint.getX();
+		int lineEndx = (int) lineEndPoint.getX();
+		int totalDist = lineEndx - lineStartx;
 		int coveredTo = lineStartx;
 		int prevX=0;
-		for(Beacon b: beacons){
-			if(b.getX()- b.getR() > coveredTo){	//For first beacon
-				b.setX(coveredTo + b.getR());
+		Client.log.info("Size of beacon:" + (lineEndx - lineStartx)/beacons.size());
+		//Client.log.info("Total Dist:" + totalDist+ ", Beacons.size:" + beacons.size() + ", radius: " + radius);
+		if(beacons.size()*2*radius <= totalDist){//Not enough, or exactly enough sensors to cover whole thing. So space evenly to cover whole thing
+			for(Beacon b: beacons){
+				b.setX(coveredTo + b.getR());		//Sets the beacons to be evenly distributed along the line, covering exactly 2R each
+				coveredTo += 2* b.getR();
 			}
-			else if(b.getX() - b.getR() > prevX +  b.getR()){
-				b.setX(prevX + 2*b.getR());
+		}
+		else{											//Case when we have enough sensors to cover more than the whole line
+			for(Beacon b: beacons){
+				if(b.getX()- b.getR() > coveredTo){		//For first beacon
+					b.setX(coveredTo + b.getR());
+				}
+				else if(b.getX() - b.getR() > prevX +  b.getR()){
+					b.setX(prevX + 2*b.getR());
+				}
+				
+				prevX = b.getX();
+				coveredTo=(b.getX()+b.getR());
+				//Client.log.info("Covered to:" + coveredTo);
 			}
-			
-			prevX = b.getX();
-			coveredTo+=b.getX()+b.getR();
 		}
 	}
-	
-	
 
-	
-	protected void CustomAlg(List<Beacon> beacons){
+	protected void CustomAlg(List<Beacon> beacons){		//Splits the beacons in half and sorts them: Should be log(n) time, faster and better coverage than the two above
 		for (int i = 0; i < beacons.size(); ++i){
 			beacons.get(i).setX(100);
 		}
 	}
-	
-	
 	
 	public void create(String choice, int numBeacons, int r){
 		int pos=0;
