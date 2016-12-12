@@ -23,6 +23,9 @@ public class DataComponent extends JPanel{
 	public static int offsetX;
 	public static Point lineStartPoint = new Point((Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y);
 	public static Point lineEndPoint = new Point(Client.DEFAULT_WIDTH - (Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y);
+	public static boolean animate = true;
+	
+	public static int SUM = 0;
 	
 	public DataComponent(){
 		BeaconList = new ArrayList<Beacon>();
@@ -64,6 +67,7 @@ public class DataComponent extends JPanel{
 		}
 	}
 	
+	
 	public void drawLine(Graphics2D beacon, Point p1, Point p2){
 		beacon.setColor(new Color(230,230,230));
 		beacon.drawLine(p1.x, p1.y, p2.x, p2.y);
@@ -81,12 +85,16 @@ public class DataComponent extends JPanel{
 			break;
 			
 		case "CustomAlg":
-			sortX(BeaconList);
+			//sortX(BeaconList);
 			//CustomAlg(BeaconList);
 			break;
 		case "Graph":
+			
 			break;
 		}
+		
+		//ChartData.resetSum();
+		repaint();
 
 	}
 	
@@ -97,7 +105,9 @@ public class DataComponent extends JPanel{
 		int coveredTo = lineStartx;
 		int count = 1;
 		int oldX = 0;
+		int sumMoves = 0;
 		for(Beacon b : beacons){
+			addToSum(b.getX()-b.getR()-lineStartx);
 			oldX = b.getX();
 			
 			if(coveredTo+ b.getR() >= lineEndx){	//All excess beacons are moved as right as possible (End of line)
@@ -106,12 +116,22 @@ public class DataComponent extends JPanel{
 			else{
 				b.setX(coveredTo + b.getR());		//Sets the beacons to be evenly distributed along the line, covering exactly 2R each
 				coveredTo += 2* b.getR();
+			}if(animate){
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				this.paintImmediately(getBounds());
 			}
 			Client.log.info("Beacon " + count + " moved from " +(oldX - (int)lineStartPoint.getX()) + " to " + (b.getX()- (int)lineStartPoint.getX()));
 			count++;
 		}
+		Data.setSumAtRadius(Display.CURRENT_RADIUS, sumMoves/beacons.size());
 	}
-	
+	public static void addToSum(double value){
+		SUM+=Math.abs(value);
+	}
 	protected void SimpleAlg(List<Beacon> beacons){
 		sortX(beacons);
 		int lineStartx =(int) lineStartPoint.getX();
@@ -125,12 +145,22 @@ public class DataComponent extends JPanel{
 		//Client.log.info("Total Dist:" + totalDist+ ", Beacons.size:" + beacons.size() + ", radius: " + radius);
 		if(beacons.size()*2*radius <= totalDist){//Not enough, or exactly enough sensors to cover whole thing. So space evenly to cover whole thing
 			for(Beacon b: beacons){
+				addToSum(b.getX()-b.getR()-lineStartx);
 				b.setX(coveredTo + b.getR());		//Sets the beacons to be evenly distributed along the line, covering exactly 2R each
 				coveredTo += 2* b.getR();
+				if(animate){
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					this.paintImmediately(getBounds());
+				}
 			}
 		}
 		else{											//Case when we have enough sensors to cover more than the whole line
 			for(Beacon b: beacons){
+				addToSum(b.getX()-b.getR()-coveredTo);
 				oldX = b.getX();
 				if(b.getX()- b.getR() > coveredTo){		//For first beacon
 					b.setX(coveredTo + b.getR());
@@ -141,6 +171,15 @@ public class DataComponent extends JPanel{
 				
 				prevX = b.getX();
 				coveredTo=(b.getX()+b.getR());
+				if(animate){
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					this.paintImmediately(getBounds());
+				}
+				this.paintImmediately(getBounds());
 				Client.log.info("Beacon " + count + " moved from " +(oldX - (int)lineStartPoint.getX()) + " to " + (b.getX()- (int)lineStartPoint.getX()));
 				count++;
 			}
@@ -149,6 +188,7 @@ public class DataComponent extends JPanel{
 			coveredTo = lineEndx;
 			
 			for(Beacon b: beacons){
+				addToSum(coveredTo - (b.getX()+b.getR()));
 				oldX = b.getX();
 				if(b.getX()+ b.getR() < coveredTo){		//For first beacon
 					b.setX(coveredTo - b.getR());
@@ -157,8 +197,21 @@ public class DataComponent extends JPanel{
 					b.setX(prevX - 2*b.getR());
 				}
 				
+				else if (b.getX()-b.getR() <= lineStartx){
+					//do nothing because we are already past the beginning of the line
+				}
+				
 				prevX = b.getX();
 				coveredTo=(b.getX()-b.getR());
+				if(animate){
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					this.paintImmediately(getBounds());
+				}
+				this.paintImmediately(getBounds());
 				Client.log.info("Then beacon " + count + " moved from " +(oldX - (int)lineStartPoint.getX()) + " to " + (b.getX()- (int)lineStartPoint.getX()));
 				count--;
 			}
@@ -168,7 +221,7 @@ public class DataComponent extends JPanel{
 	}
 
 	protected void CustomAlg(List<Beacon> beacons){		//Recursively splits the beacons in half and sorts them: Should be log(n) time, faster and better coverage than the two above
-		ArrayList<Beacon> newList = new ArrayList<Beacon>();	
+		//ArrayList<Beacon> newList = new ArrayList<Beacon>();	
 		//sort(beacons,(int) lineStartPoint.getX(), (int)lineEndPoint.getX());
 		sort(beacons,0, beacons.size()-1);
 	}
@@ -208,9 +261,9 @@ public class DataComponent extends JPanel{
 	
 	private void sortSensors(List<Beacon> b, int left, int center, int right){
 		ArrayList<Beacon> newList = new ArrayList<Beacon>();
-		int totalLength = (int)(lineStartPoint.getX() - lineEndPoint.getX());
-		int numSensors = BeaconList.size();
-		int r = radius;
+		//int totalLength = (int)(lineStartPoint.getX() - lineEndPoint.getX());
+		//int numSensors = BeaconList.size();
+		//int r = radius;
 		while(left <=center-1 && center <=right){
 			if(b.get(left).getX() <= b.get(center).getX()){
 				newList.add(b.get(left++));

@@ -2,6 +2,10 @@ package COMP3203.FINAL_PROJECT;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -10,10 +14,13 @@ import javax.swing.UIManager;
 
 public class Client extends JFrame{
 	private static final long serialVersionUID = 1L;
-	public static int DEFAULT_WIDTH = 800, DEFAULT_HEIGHT = 600;
-	public static int MAX_BEACONS = 50, MAX_RADIUS = 10, LINE_SCALE = 7;
-	public static int DATA_RANGE = 20;
+	public static int DEFAULT_WIDTH = 800, DEFAULT_HEIGHT = 600;	//Size of window
+	public static int MAX_BEACONS = 50;
+	public static int MAX_RADIUS = 10;		
+	public static int LINE_SCALE = 7;		//Size of the beacons and line in the window
+	public static int DATA_RANGE = 5;		//Sample size to determine average # moves
 	public static Logger log = Logger.getLogger(Client.class.getName());
+	
 	private View view;
 	protected static String algChoice = "Simple";
 
@@ -88,6 +95,7 @@ public class Client extends JFrame{
 		view.getDisplay().getGraphButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
+				ChartData.clearData();
 				handleGraph();
 			}
 		});
@@ -116,17 +124,26 @@ public class Client extends JFrame{
 	}
 	
 	protected void handleGraph(){
+		Map <Integer, List<Double>> map = new HashMap<Integer,List<Double>>();
+		List<Double> list = new ArrayList<Double>();
+		DataComponent.animate = false;
 		int beacons = view.getDisplay().getBeaconSlider().getValue();
-		int radius = view.getDisplay().getRadiusSlider().getValue();
+		log.info("Current Alg Choice: " + algChoice);
 		for(int i = 1; i <= Display.RADIUS_MAX; ++i){
 			view.getDisplay().getRadiusSlider().setValue(i);
-			radius = view.getDisplay().getRadiusSlider().getValue();
-			for(int j = 0; j < DATA_RANGE; ++j){
+			int radius = view.getDisplay().getRadiusSlider().getValue();
+			for(int j=0; j<DATA_RANGE; ++j){
 				view.getData().create(algChoice, beacons, radius);
 				view.getData().start(algChoice);
+				//Gets the sum of movements from the algorithms
+				list.add((double)DataComponent.SUM/Display.CURRENT_BEACONS);
 			}
+			//Puts the list of doubles in the map, calculates the average later
+			map.put(i, list);
+			
 		}
-		//Create graph
+		DataComponent.animate = true;
+		new CreateGraph("COMP3203 Final Project" ,"Radius vs Number of Movements of "+Display.CURRENT_BEACONS+" Beacons using "+algChoice + " Algorithm", map).setVisible(true);
 	}
 	
 
