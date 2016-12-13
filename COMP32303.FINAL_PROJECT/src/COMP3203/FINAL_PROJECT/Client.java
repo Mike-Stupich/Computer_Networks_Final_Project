@@ -20,7 +20,7 @@ public class Client extends JFrame{
 	public static int MAX_BEACONS = 200;
 	public static int MAX_RADIUS = 20;		
 	public static int LINE_SCALE = 7;		//Size of the beacons and line in the window
-	public static int DATA_RANGE = 20;		//Sample size to determine average # moves
+	public static int SAMPLE_SIZE = 20;		//Sample size to determine average # moves
 	public static Logger log = Logger.getLogger("COMP3203Logger");
 	
 	private View view;
@@ -151,7 +151,7 @@ public class Client extends JFrame{
 			int radius = view.getDisplay().getRadiusSlider().getValue();
 			
 			
-			for(int j=0; j<DATA_RANGE; ++j){
+			for(int j=0; j<SAMPLE_SIZE; ++j){
 				DataComponent.SUM=0;
 				DataComponent.nummoves=0;
 				view.getData().create(algChoice, beacons, radius);
@@ -168,6 +168,11 @@ public class Client extends JFrame{
 			
 		}
 		view.getDisplay().getRadiusSlider().setValue(r);
+		view.getDisplay().getCreateButton().doClick();
+		switch(algChoice){
+		
+		}
+		view.getDisplay().getSimpleButton().doClick();
 		log.info("Sum of moves map: " + map.toString());
 		log.info("Number of moves map: " + mapNumMoves.toString());
 		DataComponent.animate = true;

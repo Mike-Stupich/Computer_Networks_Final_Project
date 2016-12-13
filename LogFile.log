@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-13T11:01:05</date>
+  <millis>1481644865416</millis>
+  <sequence>0</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.Client</class>
+  <method>handleStart</method>
+  <thread>16</thread>
+  <message>N=10, R=5 (in relation to interval [0,1]: 0.05)</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:05</date>
+  <millis>1481644865531</millis>
+  <sequence>1</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 1 moved from 2 to 35</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:05</date>
+  <millis>1481644865632</millis>
+  <sequence>2</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 2 moved from 190 to 105</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:05</date>
+  <millis>1481644865733</millis>
+  <sequence>3</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 3 moved from 287 to 175</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:05</date>
+  <millis>1481644865834</millis>
+  <sequence>4</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 4 moved from 347 to 245</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:05</date>
+  <millis>1481644865935</millis>
+  <sequence>5</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 5 moved from 348 to 315</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:06</date>
+  <millis>1481644866037</millis>
+  <sequence>6</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 6 moved from 502 to 385</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:06</date>
+  <millis>1481644866138</millis>
+  <sequence>7</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 7 moved from 541 to 455</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:06</date>
+  <millis>1481644866239</millis>
+  <sequence>8</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 8 moved from 551 to 525</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:06</date>
+  <millis>1481644866340</millis>
+  <sequence>9</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 9 moved from 600 to 595</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:06</date>
+  <millis>1481644866441</millis>
+  <sequence>10</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 10 moved from 668 to 665</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868167</millis>
+  <sequence>11</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.Client</class>
+  <method>handleStart</method>
+  <thread>16</thread>
+  <message>N=10, R=5 (in relation to interval [0,1]: 0.05)</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868269</millis>
+  <sequence>12</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 1 moved from 35 to 35</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868371</millis>
+  <sequence>13</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 2 moved from 218 to 105</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868472</millis>
+  <sequence>14</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 3 moved from 239 to 175</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868572</millis>
+  <sequence>15</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 4 moved from 277 to 245</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868673</millis>
+  <sequence>16</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 5 moved from 308 to 315</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868774</millis>
+  <sequence>17</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 6 moved from 379 to 385</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868876</millis>
+  <sequence>18</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 7 moved from 515 to 455</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:08</date>
+  <millis>1481644868977</millis>
+  <sequence>19</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 8 moved from 565 to 525</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:09</date>
+  <millis>1481644869078</millis>
+  <sequence>20</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 9 moved from 654 to 595</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:09</date>
+  <millis>1481644869179</millis>
+  <sequence>21</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 10 moved from 688 to 665</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:16</date>
+  <millis>1481644876938</millis>
+  <sequence>22</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.Client</class>
+  <method>handleStart</method>
+  <thread>16</thread>
+  <message>N=15, R=5 (in relation to interval [0,1]: 0.05)</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877040</millis>
+  <sequence>23</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 1 moved from 51 to 35</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877141</millis>
+  <sequence>24</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 2 moved from 81 to 105</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877242</millis>
+  <sequence>25</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 3 moved from 210 to 175</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877344</millis>
+  <sequence>26</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 4 moved from 307 to 245</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877444</millis>
+  <sequence>27</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 5 moved from 321 to 315</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877545</millis>
+  <sequence>28</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 6 moved from 342 to 385</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877647</millis>
+  <sequence>29</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 7 moved from 368 to 455</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877748</millis>
+  <sequence>30</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 8 moved from 408 to 525</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877849</millis>
+  <sequence>31</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 9 moved from 438 to 595</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:17</date>
+  <millis>1481644877950</millis>
+  <sequence>32</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 10 moved from 483 to 665</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:18</date>
+  <millis>1481644878052</millis>
+  <sequence>33</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 11 moved from 524 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:18</date>
+  <millis>1481644878152</millis>
+  <sequence>34</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 12 moved from 591 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:18</date>
+  <millis>1481644878254</millis>
+  <sequence>35</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 13 moved from 614 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:18</date>
+  <millis>1481644878355</millis>
+  <sequence>36</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 14 moved from 623 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:18</date>
+  <millis>1481644878455</millis>
+  <sequence>37</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 15 moved from 663 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:27</date>
+  <millis>1481644887537</millis>
+  <sequence>38</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.Client</class>
+  <method>handleStart</method>
+  <thread>16</thread>
+  <message>N=15, R=10 (in relation to interval [0,1]: 0.1)</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:27</date>
+  <millis>1481644887639</millis>
+  <sequence>39</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 1 moved from 9 to 70</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:27</date>
+  <millis>1481644887739</millis>
+  <sequence>40</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 2 moved from 44 to 210</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:27</date>
+  <millis>1481644887840</millis>
+  <sequence>41</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 3 moved from 74 to 350</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:27</date>
+  <millis>1481644887941</millis>
+  <sequence>42</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 4 moved from 90 to 490</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888043</millis>
+  <sequence>43</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 5 moved from 108 to 630</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888145</millis>
+  <sequence>44</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 6 moved from 153 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888245</millis>
+  <sequence>45</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 7 moved from 164 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888346</millis>
+  <sequence>46</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 8 moved from 192 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888447</millis>
+  <sequence>47</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 9 moved from 373 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888549</millis>
+  <sequence>48</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 10 moved from 400 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888650</millis>
+  <sequence>49</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 11 moved from 457 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888752</millis>
+  <sequence>50</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 12 moved from 461 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888852</millis>
+  <sequence>51</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 13 moved from 484 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:28</date>
+  <millis>1481644888953</millis>
+  <sequence>52</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 14 moved from 528 to 700</message>
+</record>
+<record>
+  <date>2016-12-13T11:01:29</date>
+  <millis>1481644889055</millis>
+  <sequence>53</sequence>
+  <logger>COMP3203Logger</logger>
+  <level>INFO</level>
+  <class>COMP3203.FINAL_PROJECT.DataComponent</class>
+  <method>RigidAlg</method>
+  <thread>16</thread>
+  <message>Beacon 15 moved from 604 to 700</message>
+</record>
+</log>
