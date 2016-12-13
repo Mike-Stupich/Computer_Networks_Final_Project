@@ -24,6 +24,7 @@ public class DataComponent extends JPanel{
 	public static Point lineStartPoint = new Point((Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y);
 	public static Point lineEndPoint = new Point(Client.DEFAULT_WIDTH - (Client.DEFAULT_WIDTH - MAX_TRACE_LEN)/2, CENTER_Y);
 	public static boolean animate = true;
+	public static int nummoves= 0;
 	
 	public static int SUM = 0;
 	
@@ -105,8 +106,9 @@ public class DataComponent extends JPanel{
 		int coveredTo = lineStartx;
 		int count = 1;
 		int oldX = 0;
-		int sumMoves = 0;
+		//int sumMoves = 0;
 		for(Beacon b : beacons){
+			nummoves++;
 			addToSum(b.getX()-b.getR()-lineStartx);
 			oldX = b.getX();
 			
@@ -118,7 +120,7 @@ public class DataComponent extends JPanel{
 				coveredTo += 2* b.getR();
 			}if(animate){
 				try {
-					Thread.sleep(200);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -127,7 +129,6 @@ public class DataComponent extends JPanel{
 			Client.log.info("Beacon " + count + " moved from " +(oldX - (int)lineStartPoint.getX()) + " to " + (b.getX()- (int)lineStartPoint.getX()));
 			count++;
 		}
-		Data.setSumAtRadius(Display.CURRENT_RADIUS, sumMoves/beacons.size());
 	}
 	public static void addToSum(double value){
 		SUM+=Math.abs(value);
@@ -145,7 +146,8 @@ public class DataComponent extends JPanel{
 		//Client.log.info("Total Dist:" + totalDist+ ", Beacons.size:" + beacons.size() + ", radius: " + radius);
 		if(beacons.size()*2*radius <= totalDist){//Not enough, or exactly enough sensors to cover whole thing. So space evenly to cover whole thing
 			for(Beacon b: beacons){
-				addToSum(b.getX()-b.getR()-lineStartx);
+				nummoves++;
+				addToSum((b.getX()-b.getR())-lineStartx);
 				b.setX(coveredTo + b.getR());		//Sets the beacons to be evenly distributed along the line, covering exactly 2R each
 				coveredTo += 2* b.getR();
 				if(animate){
@@ -160,12 +162,16 @@ public class DataComponent extends JPanel{
 		}
 		else{											//Case when we have enough sensors to cover more than the whole line
 			for(Beacon b: beacons){
-				addToSum(b.getX()-b.getR()-coveredTo);
+				
+				
 				oldX = b.getX();
 				if(b.getX()- b.getR() > coveredTo){		//For first beacon
+					nummoves++;
+					addToSum((b.getX()-b.getR())-coveredTo);
 					b.setX(coveredTo + b.getR());
 				}
-				else if(b.getX() - b.getR() > prevX +  b.getR()){
+				else if(b.getX() - b.getR() > prevX +  b.getR()){nummoves++;
+					addToSum((b.getX()-b.getR())-coveredTo);
 					b.setX(prevX + 2*b.getR());
 				}
 				
@@ -173,7 +179,7 @@ public class DataComponent extends JPanel{
 				coveredTo=(b.getX()+b.getR());
 				if(animate){
 					try {
-						Thread.sleep(200);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -188,12 +194,17 @@ public class DataComponent extends JPanel{
 			coveredTo = lineEndx;
 			
 			for(Beacon b: beacons){
-				addToSum(coveredTo - (b.getX()+b.getR()));
+				nummoves++;
+				
 				oldX = b.getX();
 				if(b.getX()+ b.getR() < coveredTo){		//For first beacon
+					nummoves++;
+					addToSum(coveredTo - (b.getX()+b.getR()));
 					b.setX(coveredTo - b.getR());
 				}
 				else if(b.getX() + b.getR() < prevX -  b.getR()){
+					nummoves++;
+					addToSum(coveredTo - (b.getX()+b.getR()));
 					b.setX(prevX - 2*b.getR());
 				}
 				
@@ -205,7 +216,7 @@ public class DataComponent extends JPanel{
 				coveredTo=(b.getX()-b.getR());
 				if(animate){
 					try {
-						Thread.sleep(200);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

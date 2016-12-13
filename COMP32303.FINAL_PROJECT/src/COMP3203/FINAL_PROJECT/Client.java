@@ -2,10 +2,12 @@ package COMP3203.FINAL_PROJECT;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -15,11 +17,11 @@ import javax.swing.UIManager;
 public class Client extends JFrame{
 	private static final long serialVersionUID = 1L;
 	public static int DEFAULT_WIDTH = 800, DEFAULT_HEIGHT = 600;	//Size of window
-	public static int MAX_BEACONS = 50;
-	public static int MAX_RADIUS = 10;		
+	public static int MAX_BEACONS = 200;
+	public static int MAX_RADIUS = 20;		
 	public static int LINE_SCALE = 7;		//Size of the beacons and line in the window
 	public static int DATA_RANGE = 5;		//Sample size to determine average # moves
-	public static Logger log = Logger.getLogger(Client.class.getName());
+	public static Logger log = Logger.getLogger("COMP3203Logger");
 	
 	private View view;
 	protected static String algChoice = "Simple";
@@ -28,6 +30,17 @@ public class Client extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		FileHandler handler = null;
+		try {
+			handler = new FileHandler("LogFile.log", true);
+		} catch (SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		log.addHandler(handler);
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -53,7 +66,8 @@ public class Client extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		view.getDisplay().getCreateButton().doClick();
+		setButtons(false);
+		//view.getDisplay().getCreateButton().doClick();
 	}
 	
 	protected void handleEvents() {		
@@ -95,7 +109,6 @@ public class Client extends JFrame{
 		view.getDisplay().getGraphButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				ChartData.clearData();
 				handleGraph();
 			}
 		});
@@ -105,6 +118,7 @@ public class Client extends JFrame{
 		view.getDisplay().getSimpleButton().setEnabled(onOff);
 		view.getDisplay().getRigidButton().setEnabled(onOff);
 		view.getDisplay().getCustomAlgButton().setEnabled(onOff);
+		view.getDisplay().getGraphButton().setEnabled(onOff);
 	}
 	
 	protected void handleStart() {
@@ -125,25 +139,39 @@ public class Client extends JFrame{
 	
 	protected void handleGraph(){
 		Map <Integer, List<Double>> map = new HashMap<Integer,List<Double>>();
-		List<Double> list = new ArrayList<Double>();
+		Map <Integer, List<Double>> mapNumMoves = new HashMap<Integer,List<Double>>();
 		DataComponent.animate = false;
 		int beacons = view.getDisplay().getBeaconSlider().getValue();
 		log.info("Current Alg Choice: " + algChoice);
 		for(int i = 1; i <= Display.RADIUS_MAX; ++i){
+			List<Double> list = new ArrayList<Double>();
+			List<Double> listNumMoves = new ArrayList<Double>();
 			view.getDisplay().getRadiusSlider().setValue(i);
 			int radius = view.getDisplay().getRadiusSlider().getValue();
+			
+			
 			for(int j=0; j<DATA_RANGE; ++j){
+				DataComponent.SUM=0;
+				DataComponent.nummoves=0;
 				view.getData().create(algChoice, beacons, radius);
 				view.getData().start(algChoice);
 				//Gets the sum of movements from the algorithms
-				list.add((double)DataComponent.SUM/Display.CURRENT_BEACONS);
+				list.add((double)DataComponent.SUM);
+				listNumMoves.add((double)DataComponent.nummoves);
 			}
+			
+			//list.add((double)DataComponent.SUM/Display.CURRENT_BEACONS);
 			//Puts the list of doubles in the map, calculates the average later
 			map.put(i, list);
+			mapNumMoves.put(i, listNumMoves);
 			
 		}
+	
+		log.info("Sum of moves map: " + map.toString());
+		log.info("Number of moves map: " + mapNumMoves.toString());
 		DataComponent.animate = true;
-		new CreateGraph("COMP3203 Final Project" ,"Radius vs Number of Movements of "+Display.CURRENT_BEACONS+" Beacons using "+algChoice + " Algorithm", map).setVisible(true);
+		new CreateGraph("COMP3203 Final Project" ,"Radius vs Sum of Movements of "+Display.CURRENT_BEACONS+" Beacons using "+algChoice + " Algorithm", map, 0).setVisible(true);
+		new CreateGraph("COMP3203 Final Project" ,"Radius vs Number of Movements of "+Display.CURRENT_BEACONS+" Beacons using "+algChoice + " Algorithm", mapNumMoves,1).setVisible(true);
 	}
 	
 
