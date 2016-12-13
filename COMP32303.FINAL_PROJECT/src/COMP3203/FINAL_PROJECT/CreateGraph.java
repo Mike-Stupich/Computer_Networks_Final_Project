@@ -79,6 +79,9 @@ public class CreateGraph extends JFrame{
 			plot.getRendererForDataset(plot.getDataset(0)).setSeriesPaint(0, Color.RED);
 		else if (Client.algChoice == "Rigid")
 			plot.getRendererForDataset(plot.getDataset(0)).setSeriesPaint(0, Color.GREEN);
+		else{
+			plot.getRendererForDataset(plot.getDataset(0)).setSeriesPaint(0, Color.BLUE);
+		}
 		JFreeChart chart = new JFreeChart(plot);
 		chart.setTitle(title);
 		ChartPanel panel = new ChartPanel(chart);

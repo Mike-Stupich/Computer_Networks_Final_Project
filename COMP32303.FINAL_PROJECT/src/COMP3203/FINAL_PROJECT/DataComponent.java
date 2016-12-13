@@ -86,17 +86,10 @@ public class DataComponent extends JPanel{
 			break;
 			
 		case "CustomAlg":
-			//sortX(BeaconList);
-			//CustomAlg(BeaconList);
-			break;
-		case "Graph":
-			
+			CustomAlg(BeaconList);
 			break;
 		}
-		
-		//ChartData.resetSum();
 		repaint();
-
 	}
 	
 	protected void RigidAlg(List<Beacon> beacons){
@@ -185,7 +178,6 @@ public class DataComponent extends JPanel{
 					}
 					this.paintImmediately(getBounds());
 				}
-				this.paintImmediately(getBounds());
 				Client.log.info("Beacon " + count + " moved from " +(oldX - (int)lineStartPoint.getX()) + " to " + (b.getX()- (int)lineStartPoint.getX()));
 				count++;
 			}
@@ -194,7 +186,6 @@ public class DataComponent extends JPanel{
 			coveredTo = lineEndx;
 			
 			for(Beacon b: beacons){
-				nummoves++;
 				
 				oldX = b.getX();
 				if(b.getX()+ b.getR() < coveredTo){		//For first beacon
@@ -222,7 +213,6 @@ public class DataComponent extends JPanel{
 					}
 					this.paintImmediately(getBounds());
 				}
-				this.paintImmediately(getBounds());
 				Client.log.info("Then beacon " + count + " moved from " +(oldX - (int)lineStartPoint.getX()) + " to " + (b.getX()- (int)lineStartPoint.getX()));
 				count--;
 			}
@@ -232,76 +222,56 @@ public class DataComponent extends JPanel{
 	}
 
 	protected void CustomAlg(List<Beacon> beacons){		//Recursively splits the beacons in half and sorts them: Should be log(n) time, faster and better coverage than the two above
-		//ArrayList<Beacon> newList = new ArrayList<Beacon>();	
-		//sort(beacons,(int) lineStartPoint.getX(), (int)lineEndPoint.getX());
-		sort(beacons,0, beacons.size()-1);
+		
+		int lineStartx =(int) lineStartPoint.getX();
+		int lineEndx = (int) lineEndPoint.getX();
+		int totalDist = lineEndx - lineStartx;
+		int coveredTo = lineStartx;
+		if(beacons.size()*2*radius <= totalDist){//Not enough, or exactly enough sensors to cover whole thing. So space evenly to cover whole thing
+			sortX(beacons);
+			for(Beacon b: beacons){
+				nummoves++;
+				addToSum((b.getX()-b.getR())-lineStartx);
+				b.setX(coveredTo + b.getR());		//Sets the beacons to be evenly distributed along the line, covering exactly 2R each
+				coveredTo += 2* b.getR();
+				if(animate){
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					this.paintImmediately(getBounds());
+				}
+			}
+		}
+		else{
+			sort(beacons,0, beacons.size()-1);
+		}
 	}
 	
 	private void sort(List<Beacon> beacon, int left, int right){
-		//List<Beacon> leftBeacons = new ArrayList<Beacon>();
-
-		
+		int totalLength = (int)(lineEndPoint.getX() - lineStartPoint.getX());
+		int offsetToStart = (int)lineStartPoint.getX();
+		int r = beacon.get(1).getR();
 		if( left < right){
+			nummoves++;
 			int center = (left + right)/2;
+			int oldX = beacon.get(center).getX();
+			beacon.get(center).setX(totalLength/BeaconList.size()*center + offsetToStart + r);
+			addToSum(oldX-beacon.get(center).getX());
+			if(animate){
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				this.paintImmediately(getBounds());
+			}
 			sort(beacon, left, center);
 			sort(beacon, center+1, right);
-			sortSensors(beacon, left, center+1,right);
-			/*for(int i=0; i < beacon.size()/2-1; ++i){
-				if(beacon.get(i).getX() < center){
-					leftBeacons.add(beacon.get(i));
-				}
-				else{
-					
-				}
-			}*/
-
-			/*List<Beacon> rightBeacons = new ArrayList<Beacon>();
-			for(int i = beacon.size()/2; i < beacon.size()-1; ++i){
-				if(beacon.get(i).getX()>center){
-					rightBeacons.add(beacon.get(i));
-				}
-				else{
-					
-				}
-			}*/
-
 		}
-		
-		
 	}
-	
-	private void sortSensors(List<Beacon> b, int left, int center, int right){
-		ArrayList<Beacon> newList = new ArrayList<Beacon>();
-		//int totalLength = (int)(lineStartPoint.getX() - lineEndPoint.getX());
-		//int numSensors = BeaconList.size();
-		//int r = radius;
-		while(left <=center-1 && center <=right){
-			if(b.get(left).getX() <= b.get(center).getX()){
-				newList.add(b.get(left++));
-			}
-			else{
-				newList.add(b.get(center++));
-			}
-		}
-		while(left <= center-1){
-			newList.add(b.get(left++));
-		}
-		while(center<=right){
-			newList.add(b.get(center++));
-		}
-		b.clear();
-		for(int i =0; i < right-left+1; i++, right--)
-			b.add(newList.get(right));
-			
-			//Client.log.info("" + b.getX());
-		
-		//while(left <= center-1 && center <=right){
-			
-		//}
-		
-		
-	}
-	
+
 	
 	public void create(String choice, int numBeacons, int r){
 		int pos=0;

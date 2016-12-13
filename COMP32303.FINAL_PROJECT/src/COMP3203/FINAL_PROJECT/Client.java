@@ -20,7 +20,7 @@ public class Client extends JFrame{
 	public static int MAX_BEACONS = 200;
 	public static int MAX_RADIUS = 20;		
 	public static int LINE_SCALE = 7;		//Size of the beacons and line in the window
-	public static int DATA_RANGE = 5;		//Sample size to determine average # moves
+	public static int DATA_RANGE = 20;		//Sample size to determine average # moves
 	public static Logger log = Logger.getLogger("COMP3203Logger");
 	
 	private View view;
@@ -32,7 +32,7 @@ public class Client extends JFrame{
 	public static void main(String[] args) {
 		FileHandler handler = null;
 		try {
-			handler = new FileHandler("LogFile.log", true);
+			handler = new FileHandler("LogFile.log", false);
 		} catch (SecurityException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -118,7 +118,7 @@ public class Client extends JFrame{
 		view.getDisplay().getSimpleButton().setEnabled(onOff);
 		view.getDisplay().getRigidButton().setEnabled(onOff);
 		view.getDisplay().getCustomAlgButton().setEnabled(onOff);
-		view.getDisplay().getGraphButton().setEnabled(onOff);
+		//view.getDisplay().getGraphButton().setEnabled(onOff);
 	}
 	
 	protected void handleStart() {
@@ -142,6 +142,7 @@ public class Client extends JFrame{
 		Map <Integer, List<Double>> mapNumMoves = new HashMap<Integer,List<Double>>();
 		DataComponent.animate = false;
 		int beacons = view.getDisplay().getBeaconSlider().getValue();
+		int r = view.getDisplay().getRadiusSlider().getValue();
 		log.info("Current Alg Choice: " + algChoice);
 		for(int i = 1; i <= Display.RADIUS_MAX; ++i){
 			List<Double> list = new ArrayList<Double>();
@@ -166,7 +167,7 @@ public class Client extends JFrame{
 			mapNumMoves.put(i, listNumMoves);
 			
 		}
-	
+		view.getDisplay().getRadiusSlider().setValue(r);
 		log.info("Sum of moves map: " + map.toString());
 		log.info("Number of moves map: " + mapNumMoves.toString());
 		DataComponent.animate = true;
